@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopNK - India's Best Online Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="toast" style="display:none"></div>
+
+<nav class="navbar">
+    <div class="logo">ShopNK</div>
+    <div class="nav-links" id="navLinks">
+        <span id="welcomeMsg"></span>
+        <button onclick="showPage('home')" class="nav-btn">Home</button>
+        <button onclick="showPage('products')" class="nav-btn">Products</button>
+        <button onclick="showPage('orders')" class="nav-btn" id="ordersBtn" style="display:none">My Orders</button>
+        <button onclick="showPage('admin')" class="nav-btn" id="adminBtn" style="display:none">Admin</button>
+        <button onclick="showPage('cart')" class="nav-btn" id="cartBtn" style="display:none">
+            🛒 Cart <span id="cartBadge" style="display:none;background:white;color:#2874f0;border-radius:50%;padding:1px 6px;font-size:0.75rem;margin-left:4px;font-weight:700">0</span>
+        </button>
+        <button onclick="logout()" class="nav-btn btn-danger" id="logoutBtn" style="display:none">Logout</button>
+        <button onclick="showPage('login')" id="loginBtn" style="background:#fb641b;color:white;border:none;padding:7px 16px;border-radius:2px;font-weight:600;cursor:pointer;font-size:0.82rem">Login</button>
+        <button onclick="showPage('register')" id="registerBtn" style="background:white;color:#2874f0;border:1px solid white;padding:7px 16px;border-radius:2px;font-weight:600;cursor:pointer;font-size:0.82rem">Register</button>
+    </div>
+</nav>
+
+<!-- HOME -->
+<div id="home" class="page active">
+
+    <!-- 3 CATEGORY BANNERS -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;height:320px;gap:2px">
+        <div onclick="showPage('products');setTimeout(()=>filterCategory(1),300)"
+             style="position:relative;overflow:hidden;cursor:pointer">
+            <img src="https://images.unsplash.com/photo-1498049794561-7780e7231661?w=600&q=80"
+                 alt="Electronics"
+                 style="width:100%;height:100%;object-fit:cover;transition:transform 0.3s"
+                 onmouseover="this.style.transform='scale(1.05)'"
+                 onmouseout="this.style.transform='scale(1)'">
+            <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.75));padding:1.5rem 1rem">
+                <p style="color:white;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;opacity:0.9">Category</p>
+                <h3 style="color:white;font-size:1.3rem;font-weight:700;margin-bottom:8px">Electronics</h3>
+                <span style="background:white;color:#212121;padding:5px 14px;border-radius:2px;font-size:0.78rem;font-weight:600">Shop Now →</span>
+            </div>
+        </div>
+
+        <div onclick="showPage('products');setTimeout(()=>filterCategory(2),300)"
+             style="position:relative;overflow:hidden;cursor:pointer">
+            <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=600&q=80"
+                 alt="Clothing"
+                 style="width:100%;height:100%;object-fit:cover;transition:transform 0.3s"
+                 onmouseover="this.style.transform='scale(1.05)'"
+                 onmouseout="this.style.transform='scale(1)'">
+            <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.75));padding:1.5rem 1rem">
+                <p style="color:white;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;opacity:0.9">Category</p>
+                <h3 style="color:white;font-size:1.3rem;font-weight:700;margin-bottom:8px">Clothing</h3>
+                <span style="background:white;color:#212121;padding:5px 14px;border-radius:2px;font-size:0.78rem;font-weight:600">Shop Now →</span>
+            </div>
+        </div>
+
+        <div onclick="showPage('products');setTimeout(()=>filterCategory(3),300)"
+             style="position:relative;overflow:hidden;cursor:pointer">
+            <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=600&q=80"
+                 alt="Books"
+                 style="width:100%;height:100%;object-fit:cover;transition:transform 0.3s"
+                 onmouseover="this.style.transform='scale(1.05)'"
+                 onmouseout="this.style.transform='scale(1)'">
+            <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.75));padding:1.5rem 1rem">
+                <p style="color:white;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;opacity:0.9">Category</p>
+                <h3 style="color:white;font-size:1.3rem;font-weight:700;margin-bottom:8px">Books</h3>
+                <span style="background:white;color:#212121;padding:5px 14px;border-radius:2px;font-size:0.78rem;font-weight:600">Shop Now →</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- WELCOME STRIP -->
+    <div style="background:#2874f0;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center">
+        <div>
+            <h1 style="color:white;font-size:1.3rem;font-weight:700;margin:0">Welcome to ShopNK ✨</h1>
+            <p style="color:rgba(255,255,255,0.85);font-size:0.85rem;margin:2px 0 0">Neha & Kashish's one-stop shop for everything you need</p>
+        </div>
+        <button onclick="showPage('products')" style="background:#fb641b;color:white;border:none;padding:10px 28px;border-radius:2px;font-weight:600;cursor:pointer;font-size:0.9rem;white-space:nowrap">SHOP NOW</button>
+    </div>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+        <div class="stat-card"><div class="stat-number">20+</div><div class="stat-label">Total Products</div></div>
+        <div class="stat-card"><div class="stat-number">5+</div><div class="stat-label">Happy Customers</div></div>
+        <div class="stat-card"><div class="stat-number">3</div><div class="stat-label">Categories</div></div>
+        <div class="stat-card"><div class="stat-number">24/7</div><div class="stat-label">Support</div></div>
+    </div>
+
+    <!-- FEATURES -->
+    <div class="features">
+        <div class="feature-card">
+            <div class="feature-icon">📦</div>
+            <h3>Wide Selection</h3>
+            <p>Electronics, Clothing, Books and more</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🚚</div>
+            <h3>Fast Delivery</h3>
+            <p>Get your orders delivered quickly</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3>Secure Payment</h3>
+            <p>Your transactions are always safe</p>
+        </div>
+    </div>
+</div>
+
+<!-- LOGIN -->
+<div id="login" class="page">
+    <div class="auth-wrapper">
+        <div class="auth-container">
+            <h2>Login</h2>
+            <div class="form-group"><label>Email Address</label><input type="email" id="loginEmail" placeholder="Enter your email"></div>
+            <div class="form-group"><label>Password</label><input type="password" id="loginPassword" placeholder="Enter your password"></div>
+            <button onclick="login()" class="btn-primary btn-full">LOGIN</button>
+            <p class="auth-switch">New to ShopNK? <a onclick="showPage('register')">Create an account</a></p>
+            <div id="loginMsg" class="msg"></div>
+        </div>
+    </div>
+</div>
+
+<!-- REGISTER -->
+<div id="register" class="page">
+    <div class="auth-wrapper">
+        <div class="auth-container">
+            <h2>Create Account</h2>
+            <div class="form-group"><label>Full Name</label><input type="text" id="regName" placeholder="Enter your name"></div>
+            <div class="form-group"><label>Email Address</label><input type="email" id="regEmail" placeholder="Enter your email"></div>
+            <div class="form-group"><label>Password</label><input type="password" id="regPassword" placeholder="Create a password"></div>
+            <button onclick="register()" class="btn-primary btn-full">CREATE ACCOUNT</button>
+            <p class="auth-switch">Already have an account? <a onclick="showPage('login')">Login</a></p>
+            <div id="registerMsg" class="msg"></div>
+        </div>
+    </div>
+</div>
+
+<!-- PRODUCTS -->
+<div id="products" class="page">
+    <div class="page-header">
+        <h2>All Products</h2>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search for products, brands and more" oninput="searchProducts()">
+            <button class="search-bar-btn" onclick="searchProducts()">🔍</button>
+        </div>
+    </div>
+    <div class="filter-tabs">
+        <button onclick="filterCategory('all')" class="filter-btn active" id="filter-all">All</button>
+        <button onclick="filterCategory(1)" class="filter-btn" id="filter-1">⚡ Electronics</button>
+        <button onclick="filterCategory(2)" class="filter-btn" id="filter-2">👕 Clothing</button>
+        <button onclick="filterCategory(3)" class="filter-btn" id="filter-3">📚 Books</button>
+    </div>
+    <div id="productGrid" class="product-grid"></div>
+    <div style="height:2rem"></div>
+</div>
+
+<!-- CART -->
+<div id="cart" class="page">
+    <div class="cart-page">
+        <div style="background:white;padding:1rem 1.5rem;margin-bottom:1px;box-shadow:0 1px 2px rgba(0,0,0,0.05)">
+            <h2 style="font-size:1.1rem;font-weight:600">My Cart</h2>
+        </div>
+        <div class="coupon-section">
+            <input type="text" id="couponInput" placeholder="Enter coupon code (NEHA10, KASHISH20, SHOPNK15, SAVE50)">
+            <button onclick="applyCoupon()" class="coupon-btn">APPLY</button>
+            <span id="couponMsg" style="font-size:0.82rem;font-weight:600;margin-left:8px"></span>
+        </div>
+        <div id="cartItems"></div>
+        <div id="cartSummary"></div>
+        <button onclick="showPage('products')" class="btn-outline" style="margin-top:1rem">← Continue Shopping</button>
+    </div>
+</div>
+
+<!-- ORDERS -->
+<div id="orders" class="page">
+    <div class="orders-page">
+        <div style="background:white;padding:1rem 1.5rem;margin-bottom:1px;box-shadow:0 1px 2px rgba(0,0,0,0.05)">
+            <h2 style="font-size:1.1rem;font-weight:600">My Orders</h2>
+        </div>
+        <div id="ordersList" class="orders-list"></div>
+    </div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div id="productModal" class="modal" style="display:none">
+    <div class="modal-content">
+        <div id="modalProductInfo"></div>
+        <h4 style="margin:1rem 0 0.5rem;font-weight:600;font-size:0.9rem;color:#212121">Customer Reviews</h4>
+        <div id="modalReviews"></div>
+        <div id="reviewForm" style="display:none;margin-top:1rem">
+            <h4 style="margin-bottom:8px;font-weight:600;font-size:0.9rem">Write a Review</h4>
+            <select id="reviewRating" style="padding:8px;border-radius:2px;border:1px solid #e0e0e0;width:100%;margin-bottom:8px">
+                <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+                <option value="4">⭐⭐⭐⭐ Good</option>
+                <option value="3">⭐⭐⭐ Average</option>
+                <option value="2">⭐⭐ Poor</option>
+                <option value="1">⭐ Terrible</option>
+            </select>
+            <textarea id="reviewComment" placeholder="Share your experience..." style="width:100%;padding:10px;border-radius:2px;border:1px solid #e0e0e0;resize:none;height:80px;font-family:inherit;outline:none;font-size:0.85rem"></textarea>
+            <button onclick="submitReview()" class="btn-primary btn-full" style="margin-top:8px">Submit Review</button>
+        </div>
+        <button onclick="closeProductModal()" class="btn-outline btn-full" style="margin-top:8px">Close</button>
+    </div>
+</div>
+
+<!-- ADMIN -->
+<div id="admin" class="page">
+    <div class="admin-page">
+        <div style="background:white;padding:1rem 1.5rem;margin-bottom:1rem;box-shadow:0 1px 2px rgba(0,0,0,0.05)">
+            <h2 style="font-size:1.1rem;font-weight:600">Admin Panel</h2>
+        </div>
+        <div class="dashboard-grid">
+            <div class="chart-card">
+                <h3>📊 Products by Category</h3>
+                <div style="display:flex;align-items:flex-end;gap:8px;height:100px" id="salesChart"></div>
+                <div style="display:flex;gap:8px;margin-top:8px" id="salesLabels"></div>
+            </div>
+            <div class="chart-card">
+                <h3>📈 Quick Stats</h3>
+                <div id="adminStats"></div>
+            </div>
+        </div>
+        <div class="admin-tabs">
+            <button onclick="showAdminTab('products')" class="admin-tab active" id="tab-products">🛍️ Products</button>
+            <button onclick="showAdminTab('users')" class="admin-tab" id="tab-users">👥 Users</button>
+            <button onclick="showAdminTab('orders')" class="admin-tab" id="tab-orders">📦 Orders</button>
+        </div>
+        <div id="adminTab-products" class="admin-tab-content">
+            <div class="admin-grid">
+                <div class="admin-card">
+                    <h3>Add New Product</h3>
+                    <div class="form-group"><input type="text" id="adminProductName" placeholder="Product Name"></div>
+                    <div class="form-group"><input type="text" id="adminProductDesc" placeholder="Description"></div>
+                    <div class="form-group"><input type="number" id="adminProductPrice" placeholder="Price (Rs.)"></div>
+                    <div class="form-group"><input type="number" id="adminProductStock" placeholder="Stock Quantity"></div>
+                    <div class="form-group">
+                        <select id="adminProductCat">
+                            <option value="1">⚡ Electronics</option>
+                            <option value="2">👕 Clothing</option>
+                            <option value="3">📚 Books</option>
+                        </select>
+                    </div>
+                    <button onclick="addProduct()" class="btn-primary btn-full">ADD PRODUCT</button>
+                    <div id="adminMsg" class="msg"></div>
+                </div>
+                <div class="admin-card">
+                    <h3>Manage Products</h3>
+                    <div id="adminProductList"></div>
+                </div>
+            </div>
+        </div>
+        <div id="adminTab-users" class="admin-tab-content" style="display:none">
+            <div class="admin-card"><h3>All Users</h3><div id="adminUserList"></div></div>
+        </div>
+        <div id="adminTab-orders" class="admin-tab-content" style="display:none">
+            <div class="admin-card"><h3>All Orders</h3><div id="adminOrderList"></div></div>
+        </div>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
